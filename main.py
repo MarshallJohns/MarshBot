@@ -1,16 +1,20 @@
 
 import discord
+from discord.ext import commands
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print(f'Logged on as {self.user}!')
+intents = discord.Intents.all()
+client = commands.Bot(command_prefix='!',intents=intents)
 
-    async def on_message(self, message):
-        print(f'Message from {message.author}: {message.content}')
+@client.event
+async def on_ready():
+    print("Hello BB I'm ready.")
+    print("......................")
 
-intents = discord.Intents.default()
-intents.message_content = True
+@client.command()
+async def hello(ctx):
+    print(ctx.author.global_name)
+    await ctx.send(f"Hello @{ctx.author.name}")
 
-client = MyClient(intents=intents)
 
 
+client.run('MTIxNTc5MzQ4NDkxMzU3ODEyNg.GWKkPj.n-X32WjVT9YsjmOuL4jBnGGxebjhJx_NFtSTZg')
